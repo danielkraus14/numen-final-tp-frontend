@@ -14,7 +14,7 @@ function HomePage ({animes}) {
 export async function getServerSideProps() {
     
     const getAnimes = async () => {
-        const res = await fetch('http://localhost:8000/api/animes',{
+        const res = await fetch('https://dull-tan-gopher-kit.cyclic.app/api/animes',{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
