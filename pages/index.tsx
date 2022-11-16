@@ -1,12 +1,16 @@
 
 import AnimeList from '../components/animes/AnimeList';
+import {useSession} from 'next-auth/react';
 
 function HomePage ({animes}) {
-
+    const {data} = useSession();
     console.log(animes);
+    
+    console.log(data);
     
 
     return (
+
         <AnimeList animes={animes} />
     )
 }

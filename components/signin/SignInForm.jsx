@@ -1,4 +1,8 @@
 import { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useDispatch } from "react-redux";
+
 import {
   Avatar,
   Button,
@@ -12,10 +16,7 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import { useRouter } from "next/router";
-
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useDispatch } from "react-redux";
 
 function Copyright(props) {
   return (
@@ -36,6 +37,8 @@ function Copyright(props) {
 }
 
 const SignInForm = () => {
+  const { data: session } = useSession();
+  console.log("session", session);
   const router = useRouter();
   const dispatch = useDispatch();
   const errRef = useRef();
@@ -47,6 +50,11 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: usernameRef.current,
+    email: emailRef.current,
+    password: passwordRef.current,
+    });
 
   useEffect(() => {
     usernameRef.current.focus();
@@ -59,8 +67,21 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(username, email, password);
-    
-  };
+    setCredentials({
+        username: username,
+        email: email,
+        password: password,
+    });
+    await signIn('credentials',{
+        redirect: false,
+        username: username,
+        email: email,
+        password: password,
+    })
+    console.log('credentials');
+    router.push('/')
+
+};
 
   const handleUsernameInput = (e) => {
     setUsername(e.target.value);

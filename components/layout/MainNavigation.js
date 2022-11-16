@@ -14,6 +14,9 @@ function MainNavigation() {
           <li>
             <Link href='/new-anime'>Add New Anime</Link>
           </li>
+          <li>
+            <Link href='/signin'>Sign In</Link>
+          </li>
         </ul>
       </nav>
     </header>
