@@ -18,7 +18,7 @@ export default async function handler(
   switch (method) {
     case "GET":
       // Get data from your database
-      console.log("DOING GET", body);
+      console.log("toy re mareao", body);
       res.status(200).json(users);
       break;
     case "POST":
@@ -30,7 +30,8 @@ export default async function handler(
         email,
         password,
       });
-      res.status(200).json(response);
+      console.log("RESPONSE", response.data);
+      res.status(200).json(response.data);
       break;
     default:
       res.status(200).json(users);
